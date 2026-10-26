@@ -141,6 +141,9 @@ protected:
     bool mutexLockedbyRm = false;
     bool mDutyCycleEnable = false;
     bool skipSSRHandling = false;
+#if PAL_VENDOR_EXTRA_STREAM_STATE_WORDS > 0
+    uint32_t mVendorStreamState[PAL_VENDOR_EXTRA_STREAM_STATE_WORDS];
+#endif
     sem_t mInUse;
     int connectToDefaultDevice(Stream* streamHandle, uint32_t dir);
     int32_t handleDeviceStartFailure(int32_t devStatus, std::shared_ptr<Device> dev, bool& disconnect);
@@ -157,6 +160,9 @@ public:
     bool a2dpPaused = false;
     bool force_nlpi_vote = false;
     bool isMMap = false;
+#ifdef PAL_VENDOR_STREAM_ECNS_TAG
+    uint32_t mEcnsTag = 12;
+#endif
     bool isComboHeadsetActive = false;
     std::vector<pal_device_id_t> suspendedOutDevIds;
     std::vector<pal_device_id_t> suspendedInDevIds;

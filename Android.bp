@@ -17,6 +17,15 @@ cc_library_headers {
     }) + select(soong_config_variable("qtiaudio", "no_stream_mixer_event_callback"), {
         true: ["-DPAL_VENDOR_NO_STREAM_MIXER_EVENT_CALLBACK"],
         default: [],
+    }) + select(soong_config_variable("qtiaudio", "extra_stream_state_words"), {
+        any @ count: ["-DPAL_VENDOR_EXTRA_STREAM_STATE_WORDS=" + count],
+        default: ["-DPAL_VENDOR_EXTRA_STREAM_STATE_WORDS=0"],
+    }) + select(soong_config_variable("qtiaudio", "stream_ecns_tag"), {
+        true: ["-DPAL_VENDOR_STREAM_ECNS_TAG"],
+        default: [],
+    }) + select(soong_config_variable("qtiaudio", "payload_builder_custom_codec_format"), {
+        true: ["-DPAL_VENDOR_PAYLOAD_BUILDER_CUSTOM_CODEC_FORMAT"],
+        default: [],
     }),
 
     export_include_dirs: [

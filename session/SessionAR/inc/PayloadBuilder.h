@@ -191,6 +191,9 @@ protected:
    static bool isInitialized;
    void *customPayload;
    size_t customPayloadSize;
+#ifdef PAL_VENDOR_PAYLOAD_BUILDER_CUSTOM_CODEC_FORMAT
+   uint32_t customCodecFormat = UINT32_MAX;
+#endif
    static std::mutex mInitMutex;
 
 public:
